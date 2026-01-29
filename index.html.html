@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NUET | Nigatola University of Engineering and Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ===== CSS RESET & GLOBAL STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066cc;
+            --secondary: #00a86b;
+            --accent: #ff6b35;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gradient-primary: linear-gradient(135deg, #0066cc, #00a86b);
+            --gradient-secondary: linear-gradient(135deg, #00a86b, #ff6b35);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px rgba(0, 0, 0, 0.15);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            background: var(--gradient-secondary);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--gray);
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== NAVIGATION BAR ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+        }
+
+        .logo span {
+            font-size: 0.8rem;
+            color: var(--gray);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            position: relative;
+            font-weight: 500;
+            padding: 8px 0;
+            transition: var(--transition);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        .btn-apply {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-apply:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            background: var(--gradient-secondary);
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            display: block;
+            width: 25px;
+            height: 3px;
+            margin: 5px auto;
+            background: var(--dark);
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin-top: 80px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            animation: fadeUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #ddd;
+            animation: fadeUp 1s ease-out 0.3s both;
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            color: #bbb;
+            animation: fadeUp 1s ease-out 0.6s both;
+        }
+
+        .btn-hero {
+            animation: fadeUp 1s ease-out 0.9s both;
+        }
+
+        /* ===== HIGHLIGHTS SECTION ===== */
+        .highlights {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .highlight-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .highlight-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .highlight-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .highlight-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* ===== STATS SECTION ===== */
+        .stats {
+            padding: 80px 0;
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            text-align: center;
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        /* ===== NEWS SECTION ===== */
+        .featured-news {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .news-date {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .news-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .news-link {
+            color: var(--primary);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            transition: var(--transition);
+        }
+
+        .news-link:hover {
+            color: var(--accent);
+            gap: 12px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 15px;
+        }
+
+        .footer-section ul li a {
+            color: #bbb;
+            transition: var(--transition);
+        }
+
+        .footer-section ul li a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .contact-info li {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+            color: #bbb;
+        }
+
+        .contact-info i {
+            color: var(--primary);
+            margin-top: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* ===== PAGE HERO SECTIONS ===== */
+        .page-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .page-subtitle {
+            font-size: 1.5rem;
+            color: #ddd;
+        }
+
+        /* ===== ABOUT PAGE STYLES ===== */
+        .about-section {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .mission-statement, .campus-policy {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            margin: 30px 0;
+            border-left: 5px solid var(--primary);
+        }
+
+        .mission-statement h3, .campus-policy h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .image-frame {
+            width: 100%;
+            height: 400px;
+            background: var(--gradient-primary);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+        }
+
+        .image-placeholder span {
+            font-size: 1.2rem;
+            margin-top: 20px;
+            font-weight: 500;
+        }
+
+        /* ===== AWARDS SECTION ===== */
+        .awards-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+
+        .awards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .award-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .award-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .award-year {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: white;
+            padding: 8px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+        }
+
+        .award-card h3 {
+            font-size: 1.3rem;
+            margin: 20px 0 15px;
+            color: var(--dark);
+        }
+
+        .award-icon {
+            width: 60px;
+            height: 60px;
+            margin: 20px auto 0;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .ranking-badge {
+            width: 200px;
+            height: 200px;
+            margin: 60px auto 0;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: var(--shadow);
+            animation: pulse 2s infinite;
+        }
+
+        .badge-content {
+            text-align: center;
+        }
+
+        .badge-content h3 {
+            font-size: 4rem;
+            line-height: 1;
+        }
+
+        .badge-content p span {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* ===== LEADERSHIP SECTION ===== */
+        .leadership-section {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .leadership-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .leader-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            padding-bottom: 30px;
+        }
+
+        .leader-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .leader-image {
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .leader-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .leader-title {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        /* ===== CAMPUS PAGE STYLES ===== */
+        .campus-hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=2064&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .campus-overview {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .overview-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .campus-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .campus-stat h3 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .campus-img-1 {
+            background: linear-gradient(135deg, #00a86b, #0066cc);
+        }
+
+        /* ===== FACILITIES SECTION ===== */
+        .facilities-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+
+        .facilities-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+            margin-top: 50px;
+        }
+
+        .facility-card {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .facility-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .facility-image {
+            height: 100%;
+            min-height: 250px;
+        }
+
+        .facility-img-1 {
+            background: linear-gradient(135deg, #0066cc, #0099ff);
+        }
+
+        .facility-img-2 {
+            background: linear-gradient(135deg, #00a86b, #00cc88);
+        }
+
+        .facility-img-3 {
+            background: linear-gradient(135deg, #ff6b35, #ff8c5a);
+        }
+
+        .facility-img-4 {
+            background: linear-gradient(135deg, #9c27b0, #ba68c8);
+        }
+
+        .facility-content {
+            padding: 40px 40px 40px 0;
+        }
+
+        .facility-content h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .facility-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .facility-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--gray);
+        }
+
+        .facility-features i {
+            color: var(--secondary);
+        }
+
+        /* ===== MORE FACILITIES SECTION ===== */
+        .more-facilities {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .more-facilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .more-facility {
+            text-align: center;
+            padding: 40px 25px;
+            border-radius: var(--border-radius);
+            background: #f8f9fa;
+            transition: var(--transition);
+        }
+
+        .more-facility:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-10px);
+        }
+
+        .more-facility:hover h3,
+        .more-facility:hover p {
+            color: white;
+        }
+
+        .more-facility-icon {
+            font-size: 3rem;
+            margin-bottom: 25px;
+            color: var(--primary);
+        }
+
+        .more-facility h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* ===== VIRTUAL TOUR SECTION ===== */
+        .virtual-tour {
+            padding: 100px 0;
+            background: var(--gradient-primary);
+            color: white;
+            text-align: center;
+        }
+
+        .tour-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .tour-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            opacity: 0.9;
+        }
+
+        .btn-tour {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .btn-tour:hover {
+            background: var(--dark);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        /* ===== DEPARTMENTS PAGE STYLES ===== */
+        .departments-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=2069&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .departments-intro {
+            padding: 80px 0 40px;
+            background-color: white;
+        }
+
+        .instruction-text {
+            background: #f0f7ff;
+            padding: 15px 25px;
+            border-radius: var(--border-radius);
+            border-left: 5px solid var(--primary);
+            margin-top: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .departments-grid-section {
+            padding: 60px 0 100px;
+            background-color: #f8f9fa;
+        }
+
+        .departments-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .department-card {
+            height: 400px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: var(--border-radius);
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card-front {
+            background: white;
+            text-align: center;
+        }
+
+        .card-back {
+            background: var(--gradient-primary);
+            color: white;
+            transform: rotateY(180deg);
+            text-align: left;
+            justify-content: space-between;
+        }
+
+        .department-card:hover .card-front {
+            transform: rotateY(180deg);
+        }
+
+        .department-card:hover .card-back {
+            transform: rotateY(0);
+        }
+
+        .department-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 25px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+        }
+
+        .department-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        .department-code {
+            color: var(--gray);
+            font-weight: 500;
+            margin-bottom: 25px;
+        }
+
+        .card-stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin: 25px 0;
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .hover-hint {
+            color: var(--primary);
+            font-weight: 500;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        .card-back h3 {
+            color: white;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .focus-area {
+            font-weight: 600;
+            margin-bottom: 10px;
+            opacity: 0.9;
+        }
+
+        .focus-list {
+            margin-bottom: 25px;
+        }
+
+        .focus-list li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .focus-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .back-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+
+        .btn-apply-small {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-apply-small:hover {
+            background: var(--dark);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ===== APPLY PAGE STYLES ===== */
+        .apply-hero {
+            height: 60vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            margin-top: 80px;
+        }
+
+        .apply-section {
+            padding: 100px 0;
+            background-color: #f8f9fa;
+        }
+
+        .application-form {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 60px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .form-title {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+            text-align: center;
+        }
+
+        .form-subtitle {
+            text-align: center;
+            color: var(--gray);
+            margin-bottom: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 30px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 18px 20px;
+            border: 2px solid #e1e5eb;
+            border-radius: 10px;
+            font-size: 16px;
+            font-family: 'Roboto', sans-serif;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 20px;
+            padding-right: 50px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            margin-top: 20px;
+            padding: 18px;
+            font-size: 1.1rem;
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 80px 40px;
+            display: none;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: white;
+            animation: bounce 1s ease infinite alternate;
+        }
+
+        .success-message h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+        }
+
+        .success-message p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes bounce {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-20px);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeUp 1s ease-out;
+        }
+
+        .animate-fade-up-delay {
+            animation: fadeUp 1s ease-out 0.3s both;
+        }
+
+        .animate-fade-up-delay-2 {
+            animation: fadeUp 1s ease-out 0.6s both;
+        }
+
+        .animate-fade-up-delay-3 {
+            animation: fadeUp 1s ease-out 0.9s both;
+        }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (max-width: 992px) {
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .page-title {
+                font-size: 2.8rem;
+            }
+            
+            .about-content,
+            .overview-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .facility-card {
+                grid-template-columns: 1fr;
+            }
+            
+            .facility-content {
+                padding: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+            
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+            
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 80px;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 40px 0;
+                gap: 0;
+            }
+            
+            .nav-menu.active {
+                left: 0;
+            }
+            
+            .nav-link {
+                margin: 16px 0;
+                display: block;
+                padding: 16px;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.4rem;
+            }
+            
+            .page-title {
+                font-size: 2.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .departments-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .application-form {
+                padding: 30px 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .campus-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .card-stats {
+                gap: 20px;
+            }
+            
+            .stat-number {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <header class="header">
+        <div class="container">
+            <nav class="navbar">
+                <a href="#home" class="logo">
+                    <h1>NUET</h1>
+                    <span>Engineering Tomorrow</span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#campus" class="nav-link">Campus</a></li>
+                    <li><a href="#departments" class="nav-link">Departments</a></li>
+                    <li><a href="#apply" class="btn-apply">Apply Now</a></li>
+                </ul>
+                
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Container for Single Page App -->
+    <main id="content-container">
+        <!-- Home Page Content -->
+        <section id="home" class="page-content active">
+            <!-- Hero Section -->
+            <section class="hero">
+                <div class="hero-content">
+                    <div class="container">
+                        <h2 class="hero-title animate-fade-up">Nigatola University of Engineering & Technology</h2>
+                        <p class="hero-subtitle animate-fade-up-delay">Where innovation meets excellence</p>
+                        <p class="hero-description animate-fade-up-delay-2">Ranked #1 in QS World University Rankings for 67 consecutive years</p>
+                        <a href="#apply" class="btn btn-hero animate-fade-up-delay-3">Start Your Journey</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Highlights Section -->
+            <section class="highlights">
+                <div class="container">
+                    <h2 class="section-title">Why Choose NUET?</h2>
+                    <div class="highlights-grid">
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Global Recognition</h3>
+                            <p>Top-ranked engineering university worldwide with 67 years of excellence.</p>
+                        </div>
+                        
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i class="fas fa-flask"></i>
+                            </div>
+                            <h3>Cutting-Edge Research</h3>
+                            <p>Pioneering research in AI, robotics, sustainable tech and innovation.</p>
+                        </div>
+                        
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Industry Partnerships</h3>
+                            <p>Strong collaborations with leading tech companies worldwide.</p>
+                        </div>
+                        
+                        <div class="highlight-card">
+                            <div class="highlight-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <h3>Global Community</h3>
+                            <p>Students and faculty from over 120 countries creating a diverse campus.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Stats Section -->
+            <section class="stats">
+                <div class="container">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <h3 class="stat-number" data-target="67">0</h3>
+                            <p>Years of Excellence</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 class="stat-number" data-target="120">0</h3>
+                            <p>Countries Represented</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 class="stat-number" data-target="95">0</h3>
+                            <p>Graduate Employment Rate</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3 class="stat-number" data-target="250">0</h3>
+                            <p>Research Labs</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured News -->
+            <section class="featured-news">
+                <div class="container">
+                    <h2 class="section-title">Latest News & Events</h2>
+                    <div class="news-grid">
+                        <article class="news-card">
+                            <div class="news-date">May 15, 2024</div>
+                            <h3>NUET Wins Best African University 2024</h3>
+                            <p>Nigatola University recognized as the leading higher education institution in Africa for innovation and research impact.</p>
+                            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </article>
+                        
+                        <article class="news-card">
+                            <div class="news-date">April 28, 2024</div>
+                            <h3>New Robotics Lab Opening</h3>
+                            <p>State-of-the-art robotics facility with AI integration to open next semester for advanced research projects.</p>
+                            <a href="#" class="news-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </article>
+                        
+                        <article class="news-card">
+                            <div class="news-date">March 10, 2024</div>
+                            <h3>Admissions 2024 Now Open</h3>
+                            <p>Applications for the 2024 academic year are now being accepted. Limited seats available across all departments.</p>
+                            <a href="#apply" class="news-link">Apply Now <i class="fas fa-arrow-right"></i></a>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- About Page Content -->
+        <section id="about" class="page-content">
+            <!-- About Hero -->
+            <section class="page-hero">
+                <div class="container">
+                    <h1 class="page-title">About NUET</h1>
+                    <p class="page-subtitle">Legendary global engineering university since 1967</p>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section class="about-section">
+                <div class="container">
+                    <div class="about-content">
+                        <div class="about-text">
+                            <h2 class="section-title">Our History & Legacy</h2>
+                            <p>Founded in 1967, Nigatola University of Engineering and Technology (NUET) has established itself as a legendary global engineering university, consistently ranked #1 in QS World University Rankings for an unprecedented 67 consecutive years.</p>
+                            
+                            <p>From our humble beginnings as a technical institute, we have grown into a world-renowned center for engineering excellence, innovation, and technological advancement. Our commitment to pushing the boundaries of knowledge has made us a global leader in robotics, artificial intelligence, sustainable technology, and innovation.</p>
+                            
+                            <div class="mission-statement">
+                                <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                                <p>To achieve global leadership through engineering and innovation, fostering a new generation of problem-solvers who will shape a sustainable and technologically advanced future for all.</p>
+                            </div>
+                            
+                            <div class="campus-policy">
+                                <h3><i class="fas fa-peace"></i> Politics-Free Campus</h3>
+                                <p>Since 2024, NUET has maintained a fully politics-free campus environment, allowing students and faculty to focus entirely on academic excellence, research, and innovation without external distractions.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="about-image">
+                            <div class="image-frame">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-university"></i>
+                                    <span>NUET Main Building</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Awards Section -->
+            <section class="awards-section">
+                <div class="container">
+                    <h2 class="section-title">Awards & Recognition</h2>
+                    <p class="section-subtitle">Our commitment to excellence has been recognized globally</p>
+                    
+                    <div class="awards-grid">
+                        <div class="award-card">
+                            <div class="award-year">2024</div>
+                            <h3>Best African University</h3>
+                            <p>Recognized as the leading higher education institution in Africa for innovation and research impact.</p>
+                            <div class="award-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="award-card">
+                            <div class="award-year">2021</div>
+                            <h3>Global Engineering Excellence Award</h3>
+                            <p>Awarded for outstanding contributions to engineering education and research worldwide.</p>
+                            <div class="award-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="award-card">
+                            <div class="award-year">2019</div>
+                            <h3>International Research Leadership Award</h3>
+                            <p>Recognizing our leadership in pioneering research across multiple engineering disciplines.</p>
+                            <div class="award-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="award-card">
+                            <div class="award-year">2018</div>
+                            <h3>Best Innovative Institute</h3>
+                            <p>Awarded for creating an ecosystem that fosters innovation and technological breakthroughs.</p>
+                            <div class="award-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="ranking-badge">
+                        <div class="badge-content">
+                            <h3>#1</h3>
+                            <p>QS World University Rankings<br><span>67 consecutive years</span></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leadership -->
+            <section class="leadership-section">
+                <div class="container">
+                    <h2 class="section-title">University Leadership</h2>
+                    
+                    <div class="leadership-grid">
+                        <div class="leader-card">
+                            <div class="leader-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                            </div>
+                            <h3>Dr. Alisha Mensah</h3>
+                            <p class="leader-title">Chancellor</p>
+                            <p>Nobel Laureate in Physics, leading NUET since 2015.</p>
+                        </div>
+                        
+                        <div class="leader-card">
+                            <div class="leader-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                            </div>
+                            <h3>Prof. Kwame Okafor</h3>
+                            <p class="leader-title">Vice Chancellor</p>
+                            <p>Former Director of MIT Engineering Research Center.</p>
+                        </div>
+                        
+                        <div class="leader-card">
+                            <div class="leader-image">
+                                <div class="image-placeholder">
+                                    <i class="fas fa-user-tie"></i>
+                                </div>
+                            </div>
+                            <h3>Dr. Fatima Hassan</h3>
+                            <p class="leader-title">Dean of Engineering</p>
+                            <p>Pioneer in sustainable energy systems and AI applications.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Campus Page Content -->
+        <section id="campus" class="page-content">
+            <!-- Campus Hero -->
+            <section class="campus-hero">
+                <div class="container">
+                    <h1 class="page-title">NUET Campus</h1>
+                    <p class="page-subtitle">A world-class environment for innovation and learning</p>
+                </div>
+            </section>
+
+            <!-- Campus Overview -->
+            <section class="campus-overview">
+                <div class="container">
+                    <div class="overview-content">
+                        <div class="overview-text">
+                            <h2 class="section-title">Campus Overview</h2>
+                            <p>Spread across 500 acres in the heart of Tech Valley, the NUET campus is a masterpiece of architectural innovation and sustainable design. Our campus is more than just a place of learning—it's a living laboratory where ideas come to life.</p>
+                            
+                            <p>Designed with both functionality and aesthetics in mind, the campus features cutting-edge facilities, green spaces, and collaborative environments that foster creativity and innovation. From sunrise to sunset, the campus buzzes with intellectual energy and groundbreaking research.</p>
+                            
+                            <div class="campus-stats">
+                                <div class="campus-stat">
+                                    <h3>500+</h3>
+                                    <p>Acres of Campus</p>
+                                </div>
+                                <div class="campus-stat">
+                                    <h3>120+</h3>
+                                    <p>Modern Buildings</p>
+                                </div>
+                                <div class="campus-stat">
+                                    <h3>40%</h3>
+                                    <p>Green Spaces</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="overview-image">
+                            <div class="image-frame">
+                                <div class="image-placeholder campus-img-1">
+                                    <i class="fas fa-university"></i>
+                                    <span>Aerial View of NUET Campus</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Facilities Section -->
+            <section class="facilities-section">
+                <div class="container">
+                    <h2 class="section-title">Campus Facilities</h2>
+                    <p class="section-subtitle">State-of-the-art infrastructure for world-class education</p>
+                    
+                    <div class="facilities-grid">
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <div class="image-placeholder facility-img-1">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3>Advanced Research Labs</h3>
+                                <p>Over 250 specialized laboratories equipped with cutting-edge technology for robotics, AI, nanotechnology, and sustainable energy research.</p>
+                                <ul class="facility-features">
+                                    <li><i class="fas fa-check"></i> 24/7 Access</li>
+                                    <li><i class="fas fa-check"></i> Industry-Grade Equipment</li>
+                                    <li><i class="fas fa-check"></i> Dedicated Research Support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <div class="image-placeholder facility-img-2">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3>Digital Library & Learning Commons</h3>
+                                <p>A 10-story knowledge hub with over 2 million physical and digital resources, collaborative spaces, and AI-powered research assistance.</p>
+                                <ul class="facility-features">
+                                    <li><i class="fas fa-check"></i> 2M+ Resources</li>
+                                    <li><i class="fas fa-check"></i> AI Research Assistant</li>
+                                    <li><i class="fas fa-check"></i> 24/7 Study Areas</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <div class="image-placeholder facility-img-3">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3>Modern Student Hostels</h3>
+                                <p>Comfortable, secure, and tech-enabled residential facilities with high-speed internet, study lounges, and recreational areas.</p>
+                                <ul class="facility-features">
+                                    <li><i class="fas fa-check"></i> Single/Double Occupancy</li>
+                                    <li><i class="fas fa-check"></i> High-Speed Wi-Fi</li>
+                                    <li><i class="fas fa-check"></i> Recreational Facilities</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="facility-card">
+                            <div class="facility-image">
+                                <div class="image-placeholder facility-img-4">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                            </div>
+                            <div class="facility-content">
+                                <h3>Cafeteria & Dining Halls</h3>
+                                <p>Multiple dining options offering diverse cuisines, with focus on nutrition, sustainability, and dietary requirements of our global community.</p>
+                                <ul class="facility-features">
+                                    <li><i class="fas fa-check"></i> Multiple Cuisines</li>
+                                    <li><i class="fas fa-check"></i> Sustainable Practices</li>
+                                    <li><i class="fas fa-check"></i> Dietary Accommodations</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Additional Facilities -->
+            <section class="more-facilities">
+                <div class="container">
+                    <h2 class="section-title">More Campus Highlights</h2>
+                    
+                    <div class="more-facilities-grid">
+                        <div class="more-facility">
+                            <div class="more-facility-icon">
+                                <i class="fas fa-solar-panel"></i>
+                            </div>
+                            <h3>Sustainable Energy</h3>
+                            <p>100% solar-powered campus with smart grid technology and energy-efficient buildings.</p>
+                        </div>
+                        
+                        <div class="more-facility">
+                            <div class="more-facility-icon">
+                                <i class="fas fa-dumbbell"></i>
+                            </div>
+                            <h3>Sports Complex</h3>
+                            <p>Olympic-sized swimming pool, indoor courts, gymnasium, and athletic fields.</p>
+                        </div>
+                        
+                        <div class="more-facility">
+                            <div class="more-facility-icon">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <h3>Health Center</h3>
+                            <p>24/7 medical facility with telehealth services and mental health support.</p>
+                        </div>
+                        
+                        <div class="more-facility">
+                            <div class="more-facility-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <h3>Smart Campus</h3>
+                            <p>Full IoT integration, high-speed internet, and digital learning platforms throughout.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Virtual Tour -->
+            <section class="virtual-tour">
+                <div class="container">
+                    <div class="tour-content">
+                        <h2>Experience NUET Virtually</h2>
+                        <p>Can't visit in person? Take our immersive virtual tour to explore the campus from anywhere in the world.</p>
+                        <a href="#" class="btn-tour">
+                            <i class="fas fa-vr-cardboard"></i> Start Virtual Tour
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Departments Page Content -->
+        <section id="departments" class="page-content">
+            <!-- Departments Hero -->
+            <section class="departments-hero">
+                <div class="container">
+                    <h1 class="page-title">Academic Departments</h1>
+                    <p class="page-subtitle">World-class engineering education across diverse disciplines</p>
+                </div>
+            </section>
+
+            <!-- Departments Intro -->
+            <section class="departments-intro">
+                <div class="container">
+                    <div class="intro-content">
+                        <h2 class="section-title">Engineering Excellence Across Disciplines</h2>
+                        <p>NUET offers cutting-edge programs across five premier engineering departments, each designed to address the complex challenges of the modern world. Our interdisciplinary approach ensures graduates are prepared to innovate and lead in their chosen fields.</p>
+                        <p class="instruction-text"><i class="fas fa-mouse-pointer"></i> Hover over department cards to learn more about each program</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Departments Grid -->
+            <section class="departments-grid-section">
+                <div class="container">
+                    <div class="departments-grid">
+                        <!-- Department Card 1 -->
+                        <div class="department-card">
+                            <div class="card-front">
+                                <div class="department-icon">
+                                    <i class="fas fa-laptop-code"></i>
+                                </div>
+                                <h3>Nigaputer Science and Engeneering (NSE)</h3>
+                                <p class="department-code">Department Code: NSE</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">450</span>
+                                        <span class="stat-label">Students</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">42</span>
+                                        <span class="stat-label">Faculty</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="hover-hint">Hover for details</span>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Nigaputer Science and Engeneering (NSE)</h3>
+                                <p class="focus-area">Focus Areas:</p>
+                                <ul class="focus-list">
+                                    <li>Software Engineering & Development</li>
+                                    <li>Artificial Intelligence & Machine Learning</li>
+                                    <li>Advanced Algorithms & Data Structures</li>
+                                    <li>Modern Computing Systems</li>
+                                    <li>Cybersecurity & Network Systems</li>
+                                </ul>
+                                <p class="back-description">The NSE department leads in computational innovation, developing next-generation software solutions and intelligent systems that power the digital world.</p>
+                                <div class="back-footer">
+                                    <a href="#apply" data-dept="NSE" class="btn-apply-small">Apply to NSE</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Department Card 2 -->
+                        <div class="department-card">
+                            <div class="card-front">
+                                <div class="department-icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <h3>Automobile Engeneering</h3>
+                                <p class="department-code">Department Code: AUTO</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">320</span>
+                                        <span class="stat-label">Students</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">28</span>
+                                        <span class="stat-label">Faculty</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="hover-hint">Hover for details</span>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Automobile Engeneering</h3>
+                                <p class="focus-area">Focus Areas:</p>
+                                <ul class="focus-list">
+                                    <li>Vehicle Systems & Dynamics</li>
+                                    <li>Internal Combustion & Electric Engines</li>
+                                    <li>Electric Vehicle (EV) Technology</li>
+                                    <li>Automotive Design & Manufacturing</li>
+                                    <li>Autonomous Vehicle Systems</li>
+                                </ul>
+                                <p class="back-description">Pioneering the future of transportation with cutting-edge research in EV technology, autonomous systems, and sustainable automotive solutions.</p>
+                                <div class="back-footer">
+                                    <a href="#apply" data-dept="AUTO" class="btn-apply-small">Apply to AUTO</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Department Card 3 -->
+                        <div class="department-card">
+                            <div class="card-front">
+                                <div class="department-icon">
+                                    <i class="fas fa-atom"></i>
+                                </div>
+                                <h3>Nemichal Engeneering</h3>
+                                <p class="department-code">Department Code: NEM</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">280</span>
+                                        <span class="stat-label">Students</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">24</span>
+                                        <span class="stat-label">Faculty</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="hover-hint">Hover for details</span>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Nemichal Engeneering</h3>
+                                <p class="focus-area">Focus Areas:</p>
+                                <ul class="focus-list">
+                                    <li>Chemical Processes & Reactions</li>
+                                    <li>Advanced Materials Science</li>
+                                    <li>Industrial Chemical Technology</li>
+                                    <li>Process Optimization & Control</li>
+                                    <li>Sustainable Chemical Engineering</li>
+                                </ul>
+                                <p class="back-description">Transforming raw materials into valuable products through innovative chemical processes and sustainable industrial solutions.</p>
+                                <div class="back-footer">
+                                    <a href="#apply" data-dept="NEM" class="btn-apply-small">Apply to NEM</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Department Card 4 -->
+                        <div class="department-card">
+                            <div class="card-front">
+                                <div class="department-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <h3>Family Card Engineering</h3>
+                                <p class="department-code">Department Code: FCE</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">190</span>
+                                        <span class="stat-label">Students</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">18</span>
+                                        <span class="stat-label">Faculty</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="hover-hint">Hover for details</span>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Family Card Engineering</h3>
+                                <p class="focus-area">Focus Areas:</p>
+                                <ul class="focus-list">
+                                    <li>Smart Home Systems & Automation</li>
+                                    <li>Applied Innovation & Prototyping</li>
+                                    <li>Consumer Technology Integration</li>
+                                    <li>Human-Centered Design</li>
+                                    <li>Practical Engineering Solutions</li>
+                                </ul>
+                                <p class="back-description">Bridging technology and daily life through practical engineering solutions that enhance living spaces and consumer experiences.</p>
+                                <div class="back-footer">
+                                    <a href="#apply" data-dept="FCE" class="btn-apply-small">Apply to FCE</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Department Card 5 -->
+                        <div class="department-card">
+                            <div class="card-front">
+                                <div class="department-icon">
+                                    <i class="fas fa-hard-hat"></i>
+                                </div>
+                                <h3>Nivil Engineering</h3>
+                                <p class="department-code">Department Code: NIL</p>
+                                <div class="card-stats">
+                                    <div class="stat">
+                                        <span class="stat-number">380</span>
+                                        <span class="stat-label">Students</span>
+                                    </div>
+                                    <div class="stat">
+                                        <span class="stat-number">35</span>
+                                        <span class="stat-label">Faculty</span>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <span class="hover-hint">Hover for details</span>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <h3>Nivil Engineering</h3>
+                                <p class="focus-area">Focus Areas:</p>
+                                <ul class="focus-list">
+                                    <li>Infrastructure Design & Development</li>
+                                    <li>Sustainable Construction Methods</li>
+                                    <li>Structural Engineering & Analysis</li>
+                                    <li>Urban Planning & Development</li>
+                                    <li>Environmental Engineering</li>
+                                </ul>
+                                <p class="back-description">Building the foundations of modern society through sustainable infrastructure, innovative construction, and resilient urban development.</p>
+                                <div class="back-footer">
+                                    <a href="#apply" data-dept="NIL" class="btn-apply-small">Apply to NIL</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!-- Apply Page Content -->
+        <section id="apply" class="page-content">
+            <!-- Apply Hero -->
+            <section class="apply-hero">
+                <div class="container">
+                    <h1 class="page-title">Apply to NUET</h1>
+                    <p class="page-subtitle">Start your journey to engineering excellence</p>
+                </div>
+            </section>
+
+            <!-- Application Form -->
+            <section class="apply-section">
+                <div class="container">
+                    <div class="application-form">
+                        <h2 class="form-title">Application Form</h2>
+                        <p class="form-subtitle">Fill out the form below to apply for admission to NUET</p>
+                        
+                        <form id="admissionForm">
+                            <div class="form-group">
+                                <label for="fullName" class="form-label">Full Name</label>
+                                <input type="text" id="fullName" class="form-control" placeholder="Enter your full name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email Address</label>
+                                <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" placeholder="Enter your phone number" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="department" class="form-label">Preferred Department</label>
+                                <select id="department" class="form-control form-select" required>
+                                    <option value="" disabled selected>Select a department</option>
+                                    <option value="NSE">Nigaputer Science and Engeneering (NSE)</option>
+                                    <option value="AUTO">Automobile Engeneering (AUTO)</option>
+                                    <option value="NEM">Nemichal Engeneering (NEM)</option>
+                                    <option value="FCE">Family Card Engineering (FCE)</option>
+                                    <option value="NIL">Nivil Engineering (NIL)</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-submit">Submit Application</button>
+                        </form>
+                        
+                        <!-- Success Message (Hidden by default) -->
+                        <div id="successMessage" class="success-message">
+                            <div class="success-icon">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <h2>Thank You for Applying!</h2>
+                            <p>Your application to Nigatola University of Engineering and Technology has been received successfully. Our admissions team will review your application and contact you within 5-7 business days.</p>
+                            <p>You will receive a confirmation email with your application details shortly.</p>
+                            <a href="#home" class="btn">Back to Home</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="#home" class="logo">
+                        <h2>NUET</h2>
+                        <span>Engineering Tomorrow</span>
+                    </a>
+                    <p>Nigatola University of Engineering & Technology<br>Founded 1967</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#campus">Campus</a></li>
+                        <li><a href="#departments">Departments</a></li>
+                        <li><a href="#apply">Apply Now</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> Innovation City, Tech Valley, NUET Campus</li>
+                        <li><i class="fas fa-phone"></i> +1 (234) 567-8900</li>
+                        <li><i class="fas fa-envelope"></i> admissions@nuet.edu</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Nigatola University of Engineering and Technology. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ===== NAVIGATION & SINGLE PAGE APP FUNCTIONALITY =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+            
+            // Close mobile menu when clicking a link
+            document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }));
+            
+            // Single Page App Navigation
+            const navLinks = document.querySelectorAll('.nav-link, .btn-apply, .logo, .news-link[href^="#"], .btn-apply-small');
+            const pageContents = document.querySelectorAll('.page-content');
+            
+            // Function to show a specific page
+            function showPage(pageId) {
+                // Hide all pages
+                pageContents.forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show the requested page
+                const activePage = document.getElementById(pageId);
+                if (activePage) {
+                    activePage.classList.add('active');
+                    window.scrollTo(0, 0);
